@@ -1,3 +1,4 @@
+```mermaid
 graph TD
     Flask[Flask] --> Werkzeug
     Flask --> Jinja2
@@ -26,3 +27,4 @@ graph TD
     requirements.txt --> Werkzeug
     requirements.txt --> Jinja2
     requirements.txt --> setuptools
+```
