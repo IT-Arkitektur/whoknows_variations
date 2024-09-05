@@ -1,0 +1,256 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "ASP.NET Web API",
+      "version": "v1"
+    },
+    "paths": {
+      "/": {
+        "get": {
+          "tags": [
+            "Home"
+          ],
+          "summary": "Serve Root Page",
+          "operationId": "Home_Index",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/register": {
+        "get": {
+          "tags": [
+            "Account"
+          ],
+          "summary": "Serve Register Page",
+          "operationId": "Account_Register",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/login": {
+        "get": {
+          "tags": [
+            "Account"
+          ],
+          "summary": "Serve Login Page",
+          "operationId": "Account_Login",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/search": {
+        "post": {
+          "tags": [
+            "Search"
+          ],
+          "summary": "Search",
+          "operationId": "Search_Post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchBody"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SearchResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/register": {
+        "post": {
+          "tags": [
+            "Account"
+          ],
+          "summary": "Register",
+          "operationId": "Account_RegisterPost",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/login": {
+        "post": {
+          "tags": [
+            "Account"
+          ],
+          "summary": "Login",
+          "operationId": "Account_LoginPost",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/logout": {
+        "get": {
+          "tags": [
+            "Account"
+          ],
+          "summary": "Logout",
+          "operationId": "Account_Logout",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "AuthResponse": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "integer",
+              "nullable": true,
+              "description": "HTTP status code"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response message"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ProblemDetails": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "nullable": true
+            },
+            "title": {
+              "type": "string",
+              "nullable": true
+            },
+            "status": {
+              "type": "integer",
+              "nullable": true
+            },
+            "detail": {
+              "type": "string",
+              "nullable": true
+            },
+            "instance": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": { }
+        },
+        "SearchBody": {
+          "required": [
+            "q"
+          ],
+          "type": "object",
+          "properties": {
+            "q": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string",
+              "nullable": true,
+              "description": "Language code (e.g., 'en')"
+            }
+          },
+          "additionalProperties": false
+        },
+        "SearchResponse": {
+          "required": [
+            "data"
+          ],
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "description": "List of data dictionaries with mixed types."
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
